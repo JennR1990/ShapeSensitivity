@@ -157,3 +157,19 @@ for (i in 1:400) {
 }
 
 novel<- data2[sample(nrow(data2),400),]
+
+
+
+
+for (trial in 1:400){
+  
+  semtrials$Path1[trial]<- sprintf('stim/%d_stim_obj%d.tif',semtrials$Scramble[trial], semtrials$IMAGE_Num[trial])
+
+  
+}
+
+semtrials<- data.frame(rep(NA, 400),rep(NA, 400),rep('NA', 400),rep(NA, 400),rep(NA, 400),rep(NA, 400),rep(NA, 400))
+for (i in 1:400) {
+  j<- trials[i]
+  semtrials[i,]<- ST[j,]
+}
