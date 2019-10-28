@@ -14,7 +14,7 @@ for (i in 1:nrow(clusters)) {
   if((X %% 2) == 0) {
   } else {
     if ( X < 0) {
-      X <- X - 1
+      X <- X + 1
     } else {
       X<- X + 1      
     }
