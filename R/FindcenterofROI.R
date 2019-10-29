@@ -1,33 +1,46 @@
+ROIINFO<- function(){
+  
 XCENTER<- NA
 XRADIUS<- NA
+XLENGTH<- NA
 YCENTER<- NA
 YRADIUS<- NA
+YLENGTH<- NA
 ZCENTER<- NA
 ZRADIUS<- NA
+ZLENGTH<- NA
 CLUSTER<- NA
+#RADIUS<- NA
 
 
 for (i in 1:100) {
   
 
-  rangeX<- range(clusters$X[clusters$Cluster == i])
+  rangeX<- range(VoxelClusters$voxelX[VoxelClusters$VCluster == i])
   CenterX<- median(rangeX[1]:rangeX[2])
   RadiusX<-length(rangeX[1]:rangeX[2])/2
-  rangeY<- range(clusters$Y[clusters$Cluster == i])
+  rangeY<- range(VoxelClusters$voxelY[VoxelClusters$VCluster == i])
   CenterY<- median(rangeY[1]:rangeY[2])
   RadiusY<-length(rangeY[1]:rangeY[2])/2
-  rangeZ<- range(clusters$Z[clusters$Cluster == i])
+  rangeZ<- range(VoxelClusters$voxelZ[VoxelClusters$VCluster == i])
   CenterZ<- median(rangeZ[1]:rangeZ[2])
   RadiusZ<-length(rangeZ[1]:rangeZ[2])/2
   
-   XCENTER[i]<- CenterX
+   XCENTER[i]<- CenterX-RadiusX
    XRADIUS[i]<- RadiusX
-   YCENTER[i]<- CenterY
+   XLENGTH[i]<- RadiusX*2
+   YCENTER[i]<- CenterY-RadiusY
    YRADIUS[i]<- RadiusY
-   ZCENTER[i]<- CenterZ
+   YLENGTH[i]<- RadiusY*2
+   ZCENTER[i]<- CenterZ-RadiusZ
    ZRADIUS[i]<- RadiusZ
+   ZLENGTH[i]<- RadiusZ*2
    CLUSTER[i]<- i
+   #RADIUS[i]<- min(XRADIUS[i], YRADIUS[i], ZRADIUS[i])
    
-   ROIPoints<- data.frame(XCENTER, XRADIUS, YCENTER, YRADIUS, ZCENTER, ZRADIUS, CLUSTER)
+   ROIPoints<- round(data.frame(XCENTER, XRADIUS,XLENGTH, YCENTER, YRADIUS,YLENGTH, ZCENTER, ZRADIUS,ZLENGTH, CLUSTER))
+   #Radius[i]<- min(ROIPoints$XRADIUS[i], ROIPoints$YRADIUS[i], ROIPoints$ZRADIUS[i])
 
+}
+return(ROIPoints)
 }
