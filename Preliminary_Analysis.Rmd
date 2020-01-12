@@ -1,0 +1,34 @@
+---
+title: "Preliminary_Analysis"
+author: "Jennifer Ruttle"
+date: "January 12, 2020"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+source('R/Analysis.R')
+library(readxl)
+library(ez)
+data1 <- read_excel("Data/components_ANOVA_format.xlsx")
+data2 <- read_excel("Data/Only_Shape_Sensitive_voxels_ANOVA_format.xlsx")
+data3 <- read_excel("Data/Sensitivity_all_voxels_ANOVA_format.xlsx")
+```
+
+## ANOVA on Component Values
+```{r components}
+ANOVAanalysis(data1)
+```
+
+## ANOVA on Sensitivity for only shape Sensitive voxels
+```{r shape Sensitive voxels}
+ANOVAanalysis(data2)
+```
+
+## ANOVA on Sensitivity for ALL voxels
+```{r all voxels}
+ANOVAanalysis(data3)
+```
