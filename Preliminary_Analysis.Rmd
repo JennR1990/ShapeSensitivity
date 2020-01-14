@@ -21,14 +21,17 @@ data3 <- read_excel("Data/Sensitivity_all_voxels_ANOVA_format.xlsx")
 ## ANOVA on Component Values
 ```{r components}
 ANOVAanalysis(data1)
+#ANOVAanalysis1(data1)
 ```
 
 ## ANOVA on Sensitivity for only shape Sensitive voxels
 ```{r shape Sensitive voxels}
 ANOVAanalysis(data2)
+#ANOVAanalysis1(data2)
 ```
 
 ## ANOVA on Sensitivity for ALL voxels
 ```{r all voxels}
 ANOVAanalysis(data3)
+#ANOVAanalysis1(data3)
 ```
