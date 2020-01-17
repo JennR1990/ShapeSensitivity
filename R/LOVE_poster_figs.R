@@ -6,6 +6,7 @@
 novelcomponentsensitivity<- function (){
 
 vrcomp1mean<-mean(components$Betas[components$ROI_Location == 'Ventral_R' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])
+vrcomp1se<-sd(components$Betas[components$ROI_Location == 'Ventral_R' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
 vlcomp1mean<-mean(components$Betas[components$ROI_Location == 'Ventral_L' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])
 dlcomp1mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_L' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])
 drcomp1mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])
@@ -13,12 +14,24 @@ vrcomp2mean<-mean(components$Betas[components$ROI_Location == 'Ventral_R' & comp
 vlcomp2mean<-mean(components$Betas[components$ROI_Location == 'Ventral_L' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])
 dlcomp2mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_L' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])
 drcomp2mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])
-means<- c(dlcomp1mean,dlcomp2mean, drcomp1mean, drcomp2mean, vlcomp1mean, vlcomp2mean, vrcomp1mean, vrcomp2mean)
+vlcomp1se<-sd(components$Betas[components$ROI_Location == 'Ventral_L' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
+dlcomp1se<-sd(components$Betas[components$ROI_Location == 'Dorsal_L' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
+drcomp1se<-sd(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 1 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
+vrcomp2se<-sd(components$Betas[components$ROI_Location == 'Ventral_R' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
+vlcomp2se<-sd(components$Betas[components$ROI_Location == 'Ventral_L' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
+dlcomp2se<-sd(components$Betas[components$ROI_Location == 'Dorsal_L' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
+drcomp2se<-sd(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Components'])/sqrt(12)
 
-barplot(means, space = 0,main = "Novel", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-1,1), xlim = c(0,8), axes = FALSE, width = 1)
-legend(6,-0.6, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+means<- c(dlcomp1mean,dlcomp2mean, drcomp1mean, drcomp2mean, vlcomp1mean, vlcomp2mean, vrcomp1mean, vrcomp2mean)
+ses<- c(dlcomp1se,dlcomp2se, drcomp1se, drcomp2se, vlcomp1se, vlcomp2se, vrcomp1se, vrcomp2se)
+#midpoints<-barplot(means, space = 0,main = "Novel", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-1,1.20), xlim = c(0,8), axes = FALSE, width = 1)
+midpoints<-barplot(means, space = 0,main = "Novel", col = c('deepskyblue3', 'deepskyblue','deepskyblue3', 'deepskyblue','deepskyblue3', 'deepskyblue'), ylim = c(-1,1.20), xlim = c(0,8), axes = FALSE, width = 1)
+#barplot(means, space = 0,main = "Novel", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-1,1.20), xlim = c(0,8), axes = FALSE, width = 1)
+#legend(6,-0.6, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+legend(6,-0.6, legend = c('Component 1', 'Component 2'), fill = c('deepskyblue3', 'deepskyblue') )
 axis(1, at=c(1,3,5,7), labels = c('Dorsal left', 'Dorsal right', 'Ventral left', 'Ventral right'))
 axis(2, at= c(-1,0,1), labels = c(-1,0,1), las = 1)
+arrows(x0 = midpoints, y0=means - ses,  x1 = midpoints, y1 = means + ses, code = 3, angle = 90, length = .1)
 }
 
 semanticcomponentsensitivity<- function (){
@@ -32,11 +45,26 @@ semanticcomponentsensitivity<- function (){
   dlcomp2mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_L' & components$Component_Value == 2 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])
   drcomp2mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 2 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])
   means<- c(dlcomp1mean,dlcomp2mean, drcomp1mean, drcomp2mean, vlcomp1mean, vlcomp2mean, vrcomp1mean, vrcomp2mean)
+  vrcomp1se<-sd(components$Betas[components$ROI_Location == 'Ventral_R' & components$Component_Value == 1 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
+  vlcomp1se<-sd(components$Betas[components$ROI_Location == 'Ventral_L' & components$Component_Value == 1 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
+  dlcomp1se<-sd(components$Betas[components$ROI_Location == 'Dorsal_L' & components$Component_Value == 1 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
+  drcomp1se<-sd(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 1 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
+  vrcomp2se<-sd(components$Betas[components$ROI_Location == 'Ventral_R' & components$Component_Value == 2 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
+  vlcomp2se<-sd(components$Betas[components$ROI_Location == 'Ventral_L' & components$Component_Value == 2 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
+  dlcomp2se<-sd(components$Betas[components$ROI_Location == 'Dorsal_L' & components$Component_Value == 2 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
+  drcomp2se<-sd(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 2 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Components'])/sqrt(12)
   
-  barplot(means, space = 0,main = "Semantic", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-1,1), xlim = c(0,8), axes = FALSE, width = 1)
-  legend(6,-0.6, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+  
+  
+  #midpoints<-barplot(means, space = 0,main = "Semantic", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-1,1.2), xlim = c(0,8), axes = FALSE, width = 1)
+  midpoints<-barplot(means, space = 0,main = "Semantic", col = c('darkorchid4', 'darkorchid1','darkorchid4', 'darkorchid1','darkorchid4', 'darkorchid1'), ylim =  c(-1,1.2), xlim = c(0,8), axes = FALSE, width = 1)
+  #barplot(means, space = 0,main = "Semantic", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-1,1.2), xlim = c(0,8), axes = FALSE, width = 1)
+  #legend(6,-0.6, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+  legend(6,-0.6, legend = c('Component 1', 'Component 2'), fill = c('darkorchid4', 'darkorchid1') )
   axis(1, at=c(1,3,5,7), labels = c('Dorsal left', 'Dorsal right', 'Ventral left', 'Ventral right'))
   axis(2, at= c(-1,0,1), labels = c(-1,0,1), las = 1)
+  ses<- c(dlcomp1se,dlcomp2se, drcomp1se, drcomp2se, vlcomp1se, vlcomp2se, vrcomp1se, vrcomp2se)
+  arrows(x0 = midpoints, y0=means - ses, x1 = midpoints, y1 = means + ses, code = 3, angle = 90, length = .1)
 }
 
 
@@ -52,9 +80,14 @@ novelShapesen_sensitivity<- function (){
   drcomp2mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 2 & components$Object_Type == 'Novel' & components$Measurement_Type == 'Sensitivity_limited'])
   means<- c(dlcomp1mean,dlcomp2mean, drcomp1mean, drcomp2mean, vlcomp1mean, vlcomp2mean, vrcomp1mean, vrcomp2mean)
   
-  barplot(means,main = "Novel", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-0,.20), 
+  
+  
+  #barplot(means,main = "Novel", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-0,.20), 
+         # axes = FALSE, space = c(0,0,.5, 0, .5,0,.5,0))
+  barplot(means,main = "Novel", col = c('deepskyblue3', 'deepskyblue','deepskyblue3', 'deepskyblue','deepskyblue3', 'deepskyblue'), ylim = c(-0,.20), 
           axes = FALSE, space = c(0,0,.5, 0, .5,0,.5,0))
-  legend(.5,0.17, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+  #legend(.5,0.17, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+  legend(.5,0.17, legend = c('Component 1', 'Component 2'), fill = c('deepskyblue3', 'deepskyblue') )
   axis(1, at=c(1,3.5,6,8.5), labels = c('Dorsal left', 'Dorsal right', 'Ventral left', 'Ventral right'))
   axis(2, at= c(0,.05,.10,.15), labels = c(0,.05,.10,.15), las = 1)
 }
@@ -71,9 +104,12 @@ semanticShapesen_sensitivity<- function (){
   drcomp2mean<-mean(components$Betas[components$ROI_Location == 'Dorsal_R' & components$Component_Value == 2 & components$Object_Type == 'Semantic' & components$Measurement_Type == 'Sensitivity_limited'])
   means<- c(dlcomp1mean,dlcomp2mean, drcomp1mean, drcomp2mean, vlcomp1mean, vlcomp2mean, vrcomp1mean, vrcomp2mean)
   
-  barplot(means,main = "Semantic", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-0,.20), 
+  # barplot(means,main = "Semantic", col = c('black', 'grey','black', 'grey','black', 'grey'), ylim = c(-0,.20), 
+  #         axes = FALSE, space = c(0,0,.5, 0, .5,0,.5,0))
+  # legend(.5,0.17, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+  barplot(means,main = "Semantic", col = c('darkorchid4', 'darkorchid1','darkorchid4', 'darkorchid1','darkorchid4', 'darkorchid1'), ylim = c(-0,.20), 
           axes = FALSE, space = c(0,0,.5, 0, .5,0,.5,0))
-  legend(.5,0.17, legend = c('Component 1', 'Component 2'), fill = c('black', 'grey') )
+  legend(.5,0.17, legend = c('Component 1', 'Component 2'), fill = c('darkorchid4', 'darkorchid1') )
   axis(1, at=c(1,3.5,6,8.5), labels = c('Dorsal left', 'Dorsal right', 'Ventral left', 'Ventral right'))
   axis(2, at= c(0,.05,.10,.15), labels = c(0,.05,.10,.15), las = 1)
 }
@@ -81,7 +117,9 @@ semanticShapesen_sensitivity<- function (){
 
 
 
-semanticmaxsensitivity<- function (){
+Locofmaxsensitivity<- function (){
+  semantic <- read_excel("Data/semantic_component_elbow_loc_sens.xlsx")
+  novels <- read_excel("Data/novel_component_elbow_loc_sens.xlsx")
   vrmax<-semantic$Elbow_Y_loc[semantic$ROI_Location == 'ventral_right' & semantic$Elbox_Y_Sensitivity == max(semantic$Elbox_Y_Sensitivity[semantic$ROI_Location == 'ventral_right'])]
   vlmax<-semantic$Elbow_Y_loc[semantic$ROI_Location == 'ventral_left' & semantic$Elbox_Y_Sensitivity == max(semantic$Elbox_Y_Sensitivity[semantic$ROI_Location == 'ventral_left'])]
   drmax<-semantic$Elbow_Y_loc[semantic$ROI_Location == 'dorsal_right' & semantic$Elbox_Y_Sensitivity == max(semantic$Elbox_Y_Sensitivity[semantic$ROI_Location == 'dorsal_right'])]
@@ -93,9 +131,9 @@ semanticmaxsensitivity<- function (){
   
   sc<-c(dlmax,ndlmax,drmax,ndrmax,vlmax,nvlmax,vrmax,nvrmax)
   
-  barplot(sc,main = "Location of max sensitivity", col = c('grey','black', 'grey', 'black','grey','black', 'grey','black'), ylim = c(-100,0), 
+  barplot(sc,main = "Location of max sensitivity", col = c('deepskyblue3','darkorchid4', 'deepskyblue3', 'darkorchid4','deepskyblue3','darkorchid4', 'deepskyblue3','darkorchid4'), ylim = c(-100,0), 
           axes = FALSE, space = c(0,0,.5,0,.5,0,.5,0), width = .5)
-  legend(3.25,-75, legend = c('Semantic', 'Novel'), fill = c('grey', 'black') )
+  legend(3.25,-75, legend = c('Familiar', 'Unfamiliar'), fill = c('deepskyblue3', 'darkorchid4') )
   axis(1, at=c(.5,1.75,3, 4.25), labels = c('Dorsal left', 'Dorsal right', 'Ventral left', 'Ventral right'))
   axis(2, at= c(-100,-75,-50,-25,0), labels = c(-100,-75,-50,-25,0), las = 1)
 }
