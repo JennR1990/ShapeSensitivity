@@ -149,15 +149,6 @@ Locofmaxsensitivity<- function (){
   ndrmax<-novels$Elbow_Y_loc[novels$ROI_Location == 'dorsal_right' & novels$Elbox_Y_Sensitivity == max(novels$Elbox_Y_Sensitivity[novels$ROI_Location == 'dorsal_right'])]
   ndlmax<-novels$Elbow_Y_loc[novels$ROI_Location == 'dorsal_left' & novels$Elbox_Y_Sensitivity == max(novels$Elbox_Y_Sensitivity[novels$ROI_Location == 'dorsal_left'])]
 
-  vrmean<-mean(semantic$Elbow_Y_loc[semantic$ROI_Location == 'ventral_right'])
-  vlmean<-mean(semantic$Elbow_Y_loc[semantic$ROI_Location == 'ventral_left' ])
-  drmean<-mean(semantic$Elbow_Y_loc[semantic$ROI_Location == 'dorsal_right' ])
-  dlmean<-mean(semantic$Elbow_Y_loc[semantic$ROI_Location == 'dorsal_left' ])
-  nvrmean<-mean(novels$Elbow_Y_loc[novels$ROI_Location == 'ventral_right' ])
-  nvlmean<-mean(novels$Elbow_Y_loc[novels$ROI_Location == 'ventral_left' ])
-  ndrmean<-mean(novels$Elbow_Y_loc[novels$ROI_Location == 'dorsal_right'])
-  ndlmean<-mean(novels$Elbow_Y_loc[novels$ROI_Location == 'dorsal_left' ])
-    
   vrse<-sd(semantic$Elbow_Y_loc[semantic$ROI_Location == 'ventral_right'])/sqrt(12)
   vlse<-sd(semantic$Elbow_Y_loc[semantic$ROI_Location == 'ventral_left' ])/sqrt(12)
   drse<-sd(semantic$Elbow_Y_loc[semantic$ROI_Location == 'dorsal_right' ])/sqrt(12)
@@ -169,7 +160,6 @@ Locofmaxsensitivity<- function (){
   
   
   sc<-c(dlmax,ndlmax,drmax,ndrmax,vlmax,nvlmax,vrmax,nvrmax)
-  means<-c(dlmean,ndlmean,drmean,ndrmean,vlmean,nvlmean,vrmean,nvrmean)
   ses<-c(dlse,ndlse,drse,ndrse,vlse,nvlse,vrse,nvrse)
   midpoints<-barplot(sc,main = "Location of max sensitivity", col = c('deepskyblue3','darkorchid4', 'deepskyblue3', 'darkorchid4','deepskyblue3','darkorchid4', 'deepskyblue3','darkorchid4'), ylim = c(-100,0), 
           axes = FALSE, space = c(0,0,.5,0,.5,0,.5,0), width = .5)
