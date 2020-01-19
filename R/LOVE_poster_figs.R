@@ -158,12 +158,12 @@ Locofmaxsensitivity<- function (){
   ndrse<-sd(novels$Elbow_Y_loc[novels$ROI_Location == 'dorsal_right'])/sqrt(12)
   ndlse<-sd(novels$Elbow_Y_loc[novels$ROI_Location == 'dorsal_left' ])/sqrt(12)
   
-  
+
   sc<-c(dlmax,ndlmax,drmax,ndrmax,vlmax,nvlmax,vrmax,nvrmax)
   ses<-c(dlse,ndlse,drse,ndrse,vlse,nvlse,vrse,nvrse)
-  midpoints<-barplot(sc,main = "Location of max sensitivity", col = c('deepskyblue3','darkorchid4', 'deepskyblue3', 'darkorchid4','deepskyblue3','darkorchid4', 'deepskyblue3','darkorchid4'), ylim = c(-100,0), 
+  midpoints<-barplot(sc,main = "Location of max sensitivity", col = c('darkorchid4','deepskyblue3', 'darkorchid4', 'deepskyblue3','darkorchid4','deepskyblue3', 'darkorchid4','deepskyblue3'), ylim = c(-100,0), 
           axes = FALSE, space = c(0,0,.5,0,.5,0,.5,0), width = .5)
-  legend(3,-75, legend = c('Familiar', 'Unfamiliar'), fill = c('deepskyblue3', 'darkorchid4') )
+  legend(3,-75, legend = c('Familiar', 'Unfamiliar'), fill = c('darkorchid4', 'deepskyblue3') )
   axis(1, at=c(.5,1.75,3, 4.25), labels = c('Dorsal left', 'Dorsal right', 'Ventral left', 'Ventral right'))
   axis(2, at= c(-100,-75,-50,-25,0), labels = c(-100,-75,-50,-25,0), las = 1)
   arrows(x0 = midpoints, y0=sc - ses, x1 = midpoints, y1 = sc + ses, code = 3, angle = 90, length = .1)
