@@ -48,7 +48,7 @@ IMAGE_Num,Scramble,time,width,height,fix_time,Path,,,Shanaa,Raphael,Charlene,Hol
 1,4,0.65,700,700,10,stim/4_stim_obj1.tif,,,ac unit,ac unit,ac unit,ac unit,ac unit,ac unit,ac unit,ac unit,ac unit,ac unit,ac unit,ac unit
 27,4,0.65,700,700,10,stim/4_stim_obj27.tif,,,train,train,train,train,train,train,train,train,train,train,train,train
 23,16,0.65,700,700,10,stim/16_stim_obj23.tif,,,no idea,no idea,tent,tent,no idea,tent,tent,tent,tent,no idea,train,no idea
-18,256,0.65,700,700,10,stim/256_stim_obj18.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no iea,no idea,no idea
+18,256,0.65,700,700,10,stim/256_stim_obj18.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea
 43,4,0.65,700,700,10,stim/4_stim_obj43.tif,,,mirror,mirror,mirror,mirror,mirror,mirror,mirror,mirror,mirror,mirror,mirror,mirror
 37,4,0.65,700,700,10,stim/4_stim_obj37.tif,,,box,no idea,box,no idea,box,box,box,box,box,box,box,box
 62,4,0.65,700,700,10,stim/4_stim_obj62.tif,,,shoe,shoe,shoe,shoe,shoe,shoe,shoe,shoe,shoe,shoe,shoe,shoe
@@ -104,7 +104,7 @@ IMAGE_Num,Scramble,time,width,height,fix_time,Path,,,Shanaa,Raphael,Charlene,Hol
 18,64,0.65,700,700,10,stim/64_stim_obj18.tif,,,no idea,no idea,flower,no idea,no idea,no idea,peanuts,peanuts,shell,no idea,no idea,no idea
 40,1,0.65,700,700,10,stim/1_stim_obj40.tif,,,candelabra,candelabra,candelabra,candelabra,candelabra,candelabra,candelabra,candelabra,candelabra,candelabra,candelabra,candelabra
 16,16,0.65,700,700,10,stim/16_stim_obj16.tif,,,kids toy,no idea,kids toy,no idea,no idea,kids toy,no idea,kids toy,kids toy,kids toy,kids toy,kids toy
-29,64,0.65,700,700,10,stim/64_stim_obj29.tif,,,toque,no idea,toque,toque,toque,toque,toque,toque,toque,toque,toque,fabric
+29,64,0.65,700,700,10,stim/64_stim_obj29.tif,,,toque,no idea,toque,toque,toque,toque,toque,toque,toque,toque,toque,toque
 27,256,0.65,700,700,10,stim/256_stim_obj27.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,shoe,no idea,shoe,no idea,no idea,no idea
 29,1,0.65,700,700,10,stim/1_stim_obj29.tif,,,toque,toque,toque,toque,toque,toque,toque,toque,toque,toque,toque,toque
 25,1,0.65,700,700,10,stim/1_stim_obj25.tif,,,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex
@@ -300,7 +300,7 @@ IMAGE_Num,Scramble,time,width,height,fix_time,Path,,,Shanaa,Raphael,Charlene,Hol
 24,1,0.65,700,700,10,stim/1_stim_obj24.tif,,,twine,twine,twine,twine,twine,twine,twine,twine,twine,twine,twine,twine
 39,4,0.65,700,700,10,stim/4_stim_obj39.tif,,,button,button ,button,button,button,button,button,button,button,button,button ,button
 71,64,0.65,700,700,10,stim/64_stim_obj71.tif,,,outlet,outlet,outlet,outlet,outlet,outlet,outlet,outlet,outlet,outlet,outlet,outlet
-45,256,0.65,700,700,10,stim/256_stim_obj45.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,box,boxes,box,box,no idea,no idea
+45,256,0.65,700,700,10,stim/256_stim_obj45.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,box,box,box,box,no idea,no idea
 66,256,0.65,700,700,10,stim/256_stim_obj66.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,tractor,tractor,watch,button,no idea,no idea
 74,1,0.65,700,700,10,stim/1_stim_obj74.tif,,,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle,bottle
 47,16,0.65,700,700,10,stim/16_stim_obj47.tif,,,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans
@@ -336,7 +336,7 @@ IMAGE_Num,Scramble,time,width,height,fix_time,Path,,,Shanaa,Raphael,Charlene,Hol
 69,64,0.65,700,700,10,stim/64_stim_obj69.tif,,,leather desk chair,leather desk chair,leather desk chair,leather desk chair,leather desk chair,leather desk chair,leather desk chair,leather desk chair,leather desk chair,tupperwear,leather desk chair,leather desk chair
 4,16,0.65,700,700,10,stim/16_stim_obj4.tif,,,bag,bag,bag,bag,bag,bag,bag,bag,bag,bag,bag,bag
 25,4,0.65,700,700,10,stim/4_stim_obj25.tif,,,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex,kleenex
-11,4,0.65,700,700,10,stim/4_stim_obj11.tif,,,googles,no idea,googles,goggles,goggles,googles,googles,googles,no idea,tupperwear,googles,googles
+11,4,0.65,700,700,10,stim/4_stim_obj11.tif,,,googles,no idea,googles,googles,googles,googles,googles,googles,no idea,tupperwear,googles,googles
 64,16,0.65,700,700,10,stim/16_stim_obj64.tif,,,no idea,no idea,jar,no idea,no idea,jar,jar,jar,jar,jar,jar,jar
 48,64,0.65,700,700,10,stim/64_stim_obj48.tif,,,change,change,change,change,change,change,change,change,change,change,change,change
 76,1,0.65,700,700,10,stim/1_stim_obj76.tif,,,flower pot,flower pot,flower pot,flower pot,flower pot,flower pot,flower pot,flower pot,flower pot,flower pot,flower pot,flower pot
@@ -373,7 +373,7 @@ IMAGE_Num,Scramble,time,width,height,fix_time,Path,,,Shanaa,Raphael,Charlene,Hol
 42,64,0.65,700,700,10,stim/64_stim_obj42.tif,,,car,car,car,car,car,car,car,car,car,car,car,car
 50,16,0.65,700,700,10,stim/16_stim_obj50.tif,,,couch,no idea,couch,couch,couch,couch,couch,couch,couch,couch,shell ,couch
 17,256,0.65,700,700,10,stim/256_stim_obj17.tif,,,basket,basket,basket,basket,belt,basket,basket,basket,basket,basket,basket,basket
-20,4,0.65,700,700,10,stim/4_stim_obj20.tif,,,sunglasses,sunglasses,sunglasses,sungalsses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses
+20,4,0.65,700,700,10,stim/4_stim_obj20.tif,,,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses
 12,256,0.65,700,700,10,stim/256_stim_obj12.tif,,,shoe,shoe,shoe,no idea,no idea,shoe,shoe,shoe,shoe,shoe,shoe,shoe
 77,256,0.65,700,700,10,stim/256_stim_obj77.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,no idea,no idea,mailbox,tupperwear,no idea,mailbox
 35,4,0.65,700,700,10,stim/4_stim_obj35.tif,,,watch,watch,watch,watch,watch,watch,watch,watch,watch,watch,watch,watch
@@ -389,7 +389,7 @@ IMAGE_Num,Scramble,time,width,height,fix_time,Path,,,Shanaa,Raphael,Charlene,Hol
 33,4,0.65,700,700,10,stim/4_stim_obj33.tif,,,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball
 22,64,0.65,700,700,10,stim/64_stim_obj22.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,tape,no idea,no idea,no idea,no idea,tape
 6,4,0.65,700,700,10,stim/4_stim_obj6.tif,,,battery,no idea,battery,battery,battery,battery,battery,battery,battery,battery,battery,battery
-20,16,0.65,700,700,10,stim/16_stim_obj20.tif,,,sunglasses,sunglasses,sunglasses,sungalsses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses
+20,16,0.65,700,700,10,stim/16_stim_obj20.tif,,,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses,sunglasses
 37,256,0.65,700,700,10,stim/256_stim_obj37.tif,,,no idea,no idea,no idea,no idea,no idea,no idea,box,no idea,box,no idea,no idea,no idea
 47,4,0.65,700,700,10,stim/4_stim_obj47.tif,,,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans,coffee beans
 33,64,0.65,700,700,10,stim/64_stim_obj33.tif,,,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,volleyball,scale,volleyball,volleyball,volleyball,volleyball

@@ -1,25 +1,36 @@
+num<-unique(Answers$Holly)
+
+
 ImageNo<- c(1:80)
 ImageName<- c('ac unit','flower', 'tv router', 'bag', 'barrel', 'battery', 'birds nest', 'belt', 'scale', 'shell', 'googles', 'shoe', 'bench', 
-              'computer speaker', 'speaker', 'kids toy', 'basket', 'teddy bear', 'bag', 'sunglasses', 'table', 'tape', 'tent', 'twine', 'kleenex',
-              'bow tie', 'train', 'tupperwear', 'toque', 'vhs', 'gift box', 'vhs', 'volleyball', 'washing machine', 'watch', 'watermelon', 'box', ' bucket',
-              'button', 'candelabra', 'candle', 'car', 'mirror', 'champagne', 'chest', 'clock', 'coffee beans', 'change', 'cooler', 'couch', 'desk',
-              'cd holder', 'cables',' faucet', 'feather', 'flipflop', 'floppy disk','stool', 'presents', 'hard hat', 'hat','shoe', 'shoe', 'jar', 'jeans',
+              'speaker', 'speaker', 'kids toy', 'basket', 'teddy bear', 'bag', 'sunglasses', 'table', 'tape', 'tent', 'twine', 'kleenex',
+              'bow tie', 'train', 'tupperwear', 'toque', 'vhs', 'gift box', 'vhs', 'volleyball', 'washing machine', 'watch', 'watermelon', 'box', 'bucket',
+              'button', 'candelabra', 'candle', 'car', 'mirror', 'champagne', 'box', 'clock', 'coffee beans', 'change', 'cooler', 'couch', 'desk',
+              'cd holder', 'cables','faucet', 'feather', 'flipflop', 'floppy disk','stool', 'presents', 'hard hat', 'hat','shoe', 'shoe', 'jar', 'jeans',
               'tractor', 'lemon', 'basketball net', 'leather desk chair', 'clock', 'outlet', 'soother', 'peanuts', 'bottle', 'pinecone', 'flower pot',
               'mailbox', 'printer', 'cone', 'boombox')
 CorrectAnswers<-data.frame(ImageNo, ImageName)
 Image_ID<- paste(Data$IMAGE_Num, Data$Scramble, sep = '_')
 Imagesshown<- Data[,1:2]
-Responses<- Data[,10:18]
+Responses<- Data[,10:21]
 Answers<-cbind(Imagesshown, Responses)
 
+
+
 performance<- data.frame()
+#performance1<- data.frame()
 pnum<-1
-for (p in 3:11){
+for (p in 3:14){
 for (i in 1:400) {
-performance[i,pnum]<-Answers[i,p] == CorrectAnswers$ImageName[CorrectAnswers$ImageNo == Answers[i,1]]
+#performance[i,pnum]<-Answers[i,p] == CorrectAnswers$ImageName[CorrectAnswers$ImageNo == Answers[i,1]]
+performance[i,pnum]<-grepl(Answers[i,p], CorrectAnswers$ImageName[CorrectAnswers$ImageNo == Answers[i,1]])
+
 }
 pnum<- pnum + 1
 }
+
+
+performance<- performance1
 
 performance[,1]<-as.numeric(performance$V1)
 performance[,2]<-as.numeric(performance$V2)
@@ -30,18 +41,21 @@ performance[,6]<-as.numeric(performance$V6)
 performance[,7]<-as.numeric(performance$V7)
 performance[,8]<-as.numeric(performance$V8)
 performance[,9]<-as.numeric(performance$V9)
-performance[,10]<- Data$Scramble
+performance[,10]<-as.numeric(performance$V10)
+performance[,11]<-as.numeric(performance$V11)
+performance[,12]<-as.numeric(performance$V12)
+performance[,13]<- Data$Scramble
 
 OVERALL<- data.frame(Intact = c(NA,NA,NA,NA,NA,NA,NA),S4 = c(NA,NA,NA,NA,NA,NA,NA),S16 = c(NA,NA,NA,NA,NA,NA,NA),S64 = c(NA,NA,NA,NA,NA,NA,NA),S256 = c(NA,NA,NA,NA,NA,NA,NA), Participant = c(NA,NA,NA,NA,NA,NA,NA))
-for (part in 1:9) {
+for (part in 1:12) {
 
 data<- performance[,part]  
   
-Intact<-sum(data[performance$V10 == 1])/80*100
-S4<-sum(data[performance$V10 == 4])/80*100
-S16<-sum(data[performance$V10 == 16])/80*100
-S64<-sum(data[performance$V10 == 64])/80*100
-S256<-sum(data[performance$V10 == 256])/80*100
+Intact<-sum(data[performance$V13 == 1])/80*100
+S4<-sum(data[performance$V13 == 4])/80*100
+S16<-sum(data[performance$V13 == 16])/80*100
+S64<-sum(data[performance$V13 == 64])/80*100
+S256<-sum(data[performance$V13 == 256])/80*100
 Participant<- part
 OVERALL[part,]<- c(Intact,S4,S16,S64,S256, Participant) 
 }
@@ -55,15 +69,20 @@ axis(1, at = c(1,2,3,4,5), labels= c('Intact', 'S4', 'S16', 'S64', 'S256'))
 axis(2, at = c(0, 20, 40, 60, 80, 100), labels  = c(0, 20, 40, 60,80, 100), las = 2)
 legend(3,100, legend = c('Familiar'), col = 'black', bty = 'n', lty = c(1))
 
-for ( i in 1:9) {
+for ( i in 1:12) {
   color<- colors[i]
   dots<- unlist(OVERALL[i,1:5])   
   lines(dots, col = color, type = 'l')
 }
 
+
+
+
+
+
 OVERALLNovel<- data.frame(Intact = c(NA,NA,NA,NA,NA,NA,NA),S4 = c(NA,NA,NA,NA,NA,NA,NA),S16 = c(NA,NA,NA,NA,NA,NA,NA),S64 = c(NA,NA,NA,NA,NA,NA,NA),S256 = c(NA,NA,NA,NA,NA,NA,NA), Participant = c(NA,NA,NA,NA,NA,NA,NA))
 participantno<- 1
-for (part in 5:13) {
+for (part in 5:16) {
   
   data<- unlist(Dataset1[,part])
 
@@ -88,7 +107,7 @@ axis(2, at = c(40, 60, 80, 100), labels  = c(40, 60,80, 100), las = 2)
 legend(3,100, legend = c('Unfamiliar'), col = 'black', bty = 'n', lty = c(1))
 abline(h = 50 ,lty = c(2), col ='grey')
 
-for ( i in 1:9) {
+for ( i in 1:12) {
   color<- colors[i]
   dots<- unlist(OVERALLNovel[i,1:5])   
   lines(dots, col = color, type = 'l')
