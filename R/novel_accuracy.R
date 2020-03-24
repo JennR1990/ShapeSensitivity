@@ -106,7 +106,8 @@ plot(dots, type = 'l', axes = FALSE,main = 'Unfamiliar Objects', xlab = 'Scrambl
 axis(1, at = c(1,2,3,4,5), labels= c('Intact', 'S4', 'S16', 'S64', 'S256'))
 axis(2, at = c(0,20,40,60, 80, 100), labels  = c(0,20,40,60, 80, 100), las = 2)
 #legend(3,40, legend = c('Unfamiliar'), col = 'black', bty = 'n', lty = c(1))
-#abline(h = 50 ,lty = c(2), col ='grey')
+
+abline(h = 50 ,lty = c(2), col ='grey')
 
 for ( i in 1:13) {
   color<- colors[i]
