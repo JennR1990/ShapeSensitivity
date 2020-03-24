@@ -100,6 +100,7 @@ for (part in 5:17) {
 
 
 
+
 dots<- unlist(OVERALLNovel[1,1:5])
 colors<- c('dodgerblue4', 'deepskyblue1','green4', 'springgreen','violetred4', 'violet', 'darkgoldenrod4', 'darkgoldenrod1', 'red4', 'yellow', 'darkorange2', 'tan1', 'dark blue')
 plot(dots, type = 'l', axes = FALSE, xlab = 'Scrambling Level', ylab = '% Correct', ylim = c(20,100), col = 'white')
