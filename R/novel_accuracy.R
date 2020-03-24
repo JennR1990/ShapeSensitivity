@@ -70,14 +70,14 @@ for (part in 5:17) {
 
 
 
-
+# do \n to make a label two lines
 
 dots<- unlist(OVERALLNovelA[1,1:5])
 colors<- c('dodgerblue4', 'deepskyblue1','green4', 'springgreen','violetred4', 'violet', 'darkgoldenrod4', 'darkgoldenrod1', 'red4', 'yellow', 'darkorange2', 'tan1', 'dark blue')
-plot(dots, type = 'l', axes = FALSE, xlab = 'Scrambling Level', ylab = '% Correct', ylim = c(-10,50), col = 'white')
+plot(dots, type = 'l', axes = FALSE,main = 'Unfamiliar Objects', xlab = 'Scrambling Level', ylab = 'Accuracy', ylim = c(-10,50), col = 'white')
 axis(1, at = c(1,2,3,4,5), labels= c('Intact', 'S4', 'S16', 'S64', 'S256'))
 axis(2, at = c(0,10,20,30,40, 50), labels  = c(0,10,20,30,40,50), las = 2)
-legend(3,40, legend = c('Unfamiliar \n Accuracy'), col = 'black', bty = 'n', lty = c(1))
+#legend(3,40, legend = c('Unfamiliar'), col = 'black', bty = 'n', lty = c(1))
 #abline(h = 50 ,lty = c(2), col ='grey')
 
 for ( i in 1:13) {
