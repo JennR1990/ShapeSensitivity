@@ -42,18 +42,46 @@ participantno<- 1
 for (part in 5:17) {
   
   Response<- unlist(Dataset1[,part])
+  Division<-sum(c(
+    IntactH<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 1 & Response == 1])),
+    S4H<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 1 & Response == 1])),
+    S16H<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 1 & Response == 1])),
+    S64H<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 1 & Response == 1])),
+    S256H<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 1 & Response == 1])),
+    
+    IntactMiss<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 1 & Response == 2]))/2,
+    S4Miss<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 1 & Response == 2]))/2,
+    S16Miss<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 1 & Response == 2]))/2,
+    S64Miss<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 1 & Response == 2]))/2,
+    S256Miss<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 1 & Response == 2]))/2))
+  
+  Division2<- sum(c(
+    IntactH<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 2 & Response == 1 ])),
+    S4H<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 2 & Response == 1])),
+    S16H<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 2 & Response == 1])),
+    S64H<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 2 & Response == 1])),
+    S256H<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 2 & Response == 1])),
+    
+    IntactMiss<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 2 & Response == 2]))/2,
+    S4Miss<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 2 & Response == 2]))/2,
+    S16Miss<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 2 & Response == 2]))/2,
+    S64Miss<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 2 & Response == 2]))/2,
+    S256Miss<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 2 & Response == 2]))/2))
   
   
-  IntactH<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 1 & Response == 1]))/80
-  S4H<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 1 & Response == 1]))/80
-  S16H<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 1 & Response == 1]))/80
-  S64H<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 1 & Response == 1]))/80
-  S256H<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 1 & Response == 1]))/80
-  IntactFA<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 2 & Response == 1]))/80
-  S4FA<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 2 & Response == 1]))/80
-  S16FA<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 2 & Response == 1]))/80
-  S64FA<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 2 & Response == 1]))/80
-  S256FA<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 2 & Response == 1]))/80
+  
+  IntactH<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 1 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 1 & Response == 1])),(sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 1 & Response == 2]))/2))
+  S4H<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 1 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 1 & Response == 1])),(sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 1 & Response == 2]))/2))
+  S16H<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 1 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 1 & Response == 1])),(sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 1 & Response == 2]))/2))
+  S64H<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 1 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 1 & Response == 1])),(sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 1 & Response == 2]))/2))
+  S256H<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 1 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 1 & Response == 1])),(sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 1 & Response == 2]))/2))
+  
+  IntactFA<-sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 2 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 2 & Response == 1])),sum(as.numeric(Response[Dataset1$Scramble == 1 & Dataset1$Answer == 2 & Response == 2]))/2)
+  S4FA<-sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 2 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 2 & Response == 1])),sum(as.numeric(Response[Dataset1$Scramble == 4 & Dataset1$Answer == 2 & Response == 2]))/2)
+  S16FA<-sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 2 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 2 & Response == 1])),sum(as.numeric(Response[Dataset1$Scramble == 16 & Dataset1$Answer == 2 & Response == 2]))/2)
+  S64FA<-sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 2 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 2 & Response == 1])),sum(as.numeric(Response[Dataset1$Scramble == 64 & Dataset1$Answer == 2 & Response == 2]))/2)
+  S256FA<-sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 2 & Response == 1]))/sum(sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 2 & Response == 1])),sum(as.numeric(Response[Dataset1$Scramble == 256 & Dataset1$Answer == 2 & Response == 2]))/2)
+  
   
   IntactA<- (((IntactH - IntactFA)*(1-IntactFA))*100)
   S4A<- (((S4H - S4FA)*(1-S4FA))*100)
@@ -74,9 +102,9 @@ for (part in 5:17) {
 
 dots<- unlist(OVERALLNovelA[1,1:5])
 colors<- c('dodgerblue4', 'deepskyblue1','green4', 'springgreen','violetred4', 'violet', 'darkgoldenrod4', 'darkgoldenrod1', 'red4', 'yellow', 'darkorange2', 'tan1', 'dark blue')
-plot(dots, type = 'l', axes = FALSE,main = 'Unfamiliar Objects', xlab = 'Scrambling Level', ylab = 'Accuracy', ylim = c(-10,50), col = 'white')
+plot(dots, type = 'l', axes = FALSE,main = 'Unfamiliar Objects', xlab = 'Scrambling Level', ylab = 'Accuracy', ylim = c(-50,100), col = 'white')
 axis(1, at = c(1,2,3,4,5), labels= c('Intact', 'S4', 'S16', 'S64', 'S256'))
-axis(2, at = c(0,10,20,30,40, 50), labels  = c(0,10,20,30,40,50), las = 2)
+axis(2, at = c(0,20,40,60, 80, 100), labels  = c(0,20,40,60, 80, 100), las = 2)
 #legend(3,40, legend = c('Unfamiliar'), col = 'black', bty = 'n', lty = c(1))
 #abline(h = 50 ,lty = c(2), col ='grey')
 
