@@ -100,18 +100,40 @@ for (part in 5:17) {
 
 # do \n to make a label two lines
 
+OVERALLNovelA[14,]<- colMeans(OVERALLNovelA[1:12,])
 dots<- unlist(OVERALLNovelA[1,1:5])
 colors<- c('dodgerblue4', 'deepskyblue1','green4', 'springgreen','violetred4', 'violet', 'darkgoldenrod4', 'darkgoldenrod1', 'red4', 'yellow', 'darkorange2', 'tan1', 'dark blue')
-plot(dots, type = 'l', axes = FALSE,main = 'Unfamiliar Objects', xlab = 'Scrambling Level', ylab = 'Accuracy', ylim = c(-50,100), col = 'white')
+plot(dots, type = 'l', axes = FALSE,main = 'Unfamiliar Objects', xlab = 'Scrambling Level', ylab = 'Accuracy', ylim = c(-5,100), col = 'white')
 axis(1, at = c(1,2,3,4,5), labels= c('Intact', 'S4', 'S16', 'S64', 'S256'))
 axis(2, at = c(0,20,40,60, 80, 100), labels  = c(0,20,40,60, 80, 100), las = 2)
-#legend(3,40, legend = c('Unfamiliar'), col = 'black', bty = 'n', lty = c(1))
+legend(3,40, legend = c('Mean'), col = 'black', bty = 'n', lty = c(1))
 
 abline(h = 50 ,lty = c(2), col ='grey')
 
 for ( i in 1:13) {
   color<- colors[i]
+  color<- t_col(color)
   dots<- unlist(OVERALLNovelA[i,1:5])   
   lines(dots, col = color, type = 'l')
 }
 
+dots<- unlist(OVERALLNovelA[14,1:5])   
+lines(dots, col = 'black', type = 'l',lwd = 1.5)
+
+t_col <- function(color, percent = 70, name = NULL) {
+  #      color = color name
+  #    percent = % transparency
+  #       name = an optional name for the color
+  
+  ## Get RGB values for named color
+  rgb.val <- col2rgb(color)
+  
+  ## Make new color using input color as base and alpha set by transparency
+  t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
+               max = 255,
+               alpha = (100 - percent) * 255 / 100,
+               names = name)
+  
+  ## Save the color
+  invisible(t.col)
+}
