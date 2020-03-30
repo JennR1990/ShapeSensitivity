@@ -76,8 +76,10 @@ ROIS<- c("lh_v1v_center", "lh_v2v_center", "lh_v3v_center", "lh_hv4", "lh_vo1", 
 
 names(SemanticPartialCorrs)<- ROIS
 names(NovelPartialCorrs)<- ROIS
-Correlations<- rbind(SemanticPartialCorrs, NovelPartialCorrs)
+#Correlations<- rbind(SemanticPartialCorrs, NovelPartialCorrs)
 
-
-
+nmeans<-colMeans(NovelPartialCorrs[,1:46])
+barplot(nmeans, las = 2, cex.names = .75, main = "Novel Partial Correlations", ylab = "Partial Correlation")
+smeans<-colMeans(SemanticPartialCorrs[,1:46])
+barplot(smeans, las = 2, cex.names = .75, main = "Semantic Partial Correlations", ylab = "Partial Correlation")
 
