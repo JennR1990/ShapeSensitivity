@@ -62,6 +62,8 @@ for (sub in 1:12){
     model<-pcor.test(betas1, perf, control)
     Correlation[loc]<-model$estimate
   }
+  
+  
   Correlation[length(Correlation)+1]<- sub
   Correlation<-as.vector(Correlation)
   if (length(SemanticPartialCorrs)[1]<1){
@@ -77,4 +79,78 @@ names(SemanticPartialCorrs)<- ROIS
 smeans<-colMeans(SemanticPartialCorrs[,1:46])
 barplot(smeans, las = 2, cex.names = .75, main = "Semantic Partial Correlations", ylab = "Partial Correlation")
 
+}
+
+
+
+CalculateSlopes<- function(){
+#get linear slope for novel and semantic
+SemanticPartialslopes<- data.frame()
+for (sub in 1:12){
+  Slope<- c()
+  print(sub)
+  filename<-sprintf("semantic_beta_sub%.0f.csv", sub)
+  data<- read.csv(filename, header = FALSE)
+  
+  
+  for (ROI in 2:47){
+    loc<- ROI - 1
+    betas1<- as.numeric(unlist(data[1:5,ROI]))
+    perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Semantic",1:5]))
+    control<- c(1,2,3,4,5)
+    model<-lm(betas1~ perf)
+    Slope[loc]<-as.numeric(unlist(model$coefficients[2]))
+  }
+  
+  
+  Slope[length(Slope)+1]<- sub
+  Slope<-as.vector(Slope)
+  if (length(SemanticPartialslopes)[1]<1){
+    SemanticPartialslopes<- Slope
+  }else{
+    SemanticPartialslopes<- rbind(SemanticPartialslopes, Slope)
+  }
+  
+}
+SemanticPartialslopes<- data.frame(SemanticPartialslopes)
+SemanticPartialslopes$Object_Type<- 'Semantic'
+names(SemanticPartialslopes)<- ROIS
+smeans<-colMeans(SemanticPartialslopes[,1:46])
+barplot(smeans, las = 2, cex.names = .75, main = "Semantic Slopes", ylab = "Slopes")
+
+
+
+
+NovelPartialslopes<- data.frame()
+for (sub in 1:12){
+  Slope<- c()
+  print(sub)
+  filename<-sprintf("novel_beta_sub%.0f.csv", sub)
+  data<- read.csv(filename, header = FALSE)
+  
+  
+  for (ROI in 2:47){
+    loc<- ROI - 1
+    betas1<- as.numeric(unlist(data[1:5,ROI]))
+    perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Novel",1:5]))
+    control<- c(1,2,3,4,5)
+    model<-lm(betas1~ perf)
+    Slope[loc]<-as.numeric(unlist(model$coefficients[2]))
+  }
+  
+  
+  Slope[length(Slope)+1]<- sub
+  Slope<-as.vector(Slope)
+  if (length(NovelPartialslopes)[1]<1){
+    NovelPartialslopes<- Slope
+  }else{
+    NovelPartialslopes<- rbind(NovelPartialslopes, Slope)
+  }
+  
+}
+NovelPartialslopes<- data.frame(NovelPartialslopes)
+NovelPartialslopes$Object_Type<- 'Novel'
+names(NovelPartialslopes)<- ROIS
+nmeans<-colMeans(NovelPartialslopes[,1:46])
+barplot(nmeans, las = 2, cex.names = .75, main = "Novel Slopes", ylab = "Slopes")
 }
