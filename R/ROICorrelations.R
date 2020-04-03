@@ -1,8 +1,8 @@
 
 ROIpartialcorrelation<- function(){
 
-Novel_behavioural_accuracy_per_subject <- read_csv("../Novel_behavioural_accuracy_per_subject.csv")
-Sem <- read_csv("../Semantic_Performance.csv")
+Novel_behavioural_accuracy_per_subject <- read.csv("../Novel_behavioural_accuracy_per_subject.csv")
+Sem <- read.csv("../Semantic_Performance.csv")
 beh<- rbind(Sem, Novel_behavioural_accuracy_per_subject)
 ROIS<- c("lh_v1v_center", "lh_v2v_center", "lh_v3v_center", "lh_hv4", "lh_vo1", "lh_vo2", "lh_ph1", "lh_ph2", 
          "afs_l", "lh_lo1", "lh_lo2", "lh_to1", "lh_v1d_centre", "lh_v2d_centre", "lh_v3d_centre", "lh_v3a","lh_v3b",
@@ -14,7 +14,7 @@ ROIS<- c("lh_v1v_center", "lh_v2v_center", "lh_v3v_center", "lh_hv4", "lh_vo1", 
 
 
 NovelPartialCorrs<- data.frame()
-for (sub in 1:12){
+for (sub in 1:13){
   Correlation<- c()
   print(sub)
   filename<-sprintf("novel_beta_sub%.0f.csv", sub)
@@ -47,7 +47,7 @@ barplot(nmeans, las = 2, cex.names = .75, main = "Novel Partial Correlations", y
 
 
 SemanticPartialCorrs<- data.frame()
-for (sub in 1:12){
+for (sub in 1:13){
   Correlation<- c()
   print(sub)
   filename<-sprintf("semantic_beta_sub%.0f.csv", sub)
@@ -85,8 +85,8 @@ barplot(smeans, las = 2, cex.names = .75, main = "Semantic Partial Correlations"
 
 CalculateSlopes<- function(){
 #get linear slope for novel and semantic
-SemanticPartialslopes<- data.frame()
-for (sub in 1:12){
+Semanticslopes<- data.frame()
+for (sub in 1:13){
   Slope<- c()
   print(sub)
   filename<-sprintf("semantic_beta_sub%.0f.csv", sub)
@@ -98,31 +98,31 @@ for (sub in 1:12){
     betas1<- as.numeric(unlist(data[1:5,ROI]))
     perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Semantic",1:5]))
     control<- c(1,2,3,4,5)
-    model<-lm(betas1~ perf)
+    model<-lm(betas1~ control)
     Slope[loc]<-as.numeric(unlist(model$coefficients[2]))
   }
   
   
   Slope[length(Slope)+1]<- sub
   Slope<-as.vector(Slope)
-  if (length(SemanticPartialslopes)[1]<1){
-    SemanticPartialslopes<- Slope
+  if (length(Semanticslopes)[1]<1){
+    Semanticslopes<- Slope
   }else{
-    SemanticPartialslopes<- rbind(SemanticPartialslopes, Slope)
+    Semanticslopes<- rbind(Semanticslopes, Slope)
   }
   
 }
-SemanticPartialslopes<- data.frame(SemanticPartialslopes)
-SemanticPartialslopes$Object_Type<- 'Semantic'
-names(SemanticPartialslopes)<- ROIS
-smeans<-colMeans(SemanticPartialslopes[,1:46])
+Semanticslopes<- data.frame(Semanticslopes)
+Semanticslopes$Object_Type<- 'Semantic'
+names(Semanticslopes)<- ROIS
+smeans<-colMeans(Semanticslopes[,1:46])
 barplot(smeans, las = 2, cex.names = .75, main = "Semantic Slopes", ylab = "Slopes")
 
 
 
 
-NovelPartialslopes<- data.frame()
-for (sub in 1:12){
+Novelslopes<- data.frame()
+for (sub in 1:13){
   Slope<- c()
   print(sub)
   filename<-sprintf("novel_beta_sub%.0f.csv", sub)
@@ -134,23 +134,23 @@ for (sub in 1:12){
     betas1<- as.numeric(unlist(data[1:5,ROI]))
     perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Novel",1:5]))
     control<- c(1,2,3,4,5)
-    model<-lm(betas1~ perf)
+    model<-lm(betas1~ control)
     Slope[loc]<-as.numeric(unlist(model$coefficients[2]))
   }
   
   
   Slope[length(Slope)+1]<- sub
   Slope<-as.vector(Slope)
-  if (length(NovelPartialslopes)[1]<1){
-    NovelPartialslopes<- Slope
+  if (length(Novelslopes)[1]<1){
+    Novelslopes<- Slope
   }else{
-    NovelPartialslopes<- rbind(NovelPartialslopes, Slope)
+    Novelslopes<- rbind(Novelslopes, Slope)
   }
   
 }
-NovelPartialslopes<- data.frame(NovelPartialslopes)
-NovelPartialslopes$Object_Type<- 'Novel'
-names(NovelPartialslopes)<- ROIS
-nmeans<-colMeans(NovelPartialslopes[,1:46])
+Novelslopes<- data.frame(Novelslopes)
+Novelslopes$Object_Type<- 'Novel'
+names(Novelslopes)<- ROIS
+nmeans<-colMeans(Novelslopes[,1:46])
 barplot(nmeans, las = 2, cex.names = .75, main = "Novel Slopes", ylab = "Slopes")
 }
