@@ -191,7 +191,7 @@ CalculateR<- function(){
   SemanticRs$Object_Type<- 'Semantic'
   names(SemanticRs)<- ROIS
   smeans<-colMeans(SemanticRs[,1:46])
-  barplot(smeans, las = 2, cex.names = .75, main = "Semantic Rs", ylab = "R Values")
+  barplot(smeans, las = 2, cex.names = .75, main = "Semantic Rs", ylab = "R Values", ylim = c(0, .8))
   
   
   
@@ -227,5 +227,5 @@ CalculateR<- function(){
   NovelRs$Object_Type<- 'Novel'
   names(NovelRs)<- ROIS
   nmeans<-colMeans(NovelRs[,1:46])
-  barplot(nmeans, las = 2, cex.names = .75, main = "Novel Rs", ylab = "R Values")
+  barplot(nmeans, las = 2, cex.names = .75, main = "Novel Rs", ylab = "R Values", ylim = c(0,.8))
 }
