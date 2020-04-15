@@ -191,7 +191,7 @@ CalculateR<- function(){
   SemanticRs$Object_Type<- 'Semantic'
   names(SemanticRs)<- ROIS
   smeans<-colMeans(SemanticRs[,1:46])
-  barplot(smeans, las = 2, cex.names = .75, main = "Semantic Rs", ylab = "R Values", ylim = c(0, .8))
+  barplot(smeans, las = 2, cex.names = .75, main = "Semantic Linear Rs", ylab = "R Values", ylim = c(0, .8))
   
   
   
@@ -227,5 +227,151 @@ CalculateR<- function(){
   NovelRs$Object_Type<- 'Novel'
   names(NovelRs)<- ROIS
   nmeans<-colMeans(NovelRs[,1:46])
-  barplot(nmeans, las = 2, cex.names = .75, main = "Novel Rs", ylab = "R Values", ylim = c(0,.8))
+  barplot(nmeans, las = 2, cex.names = .75, main = "Novel Linear Rs", ylab = "R Values", ylim = c(0,.8))
+}
+
+
+CalculatelogR<- function(){
+  #get linear slope for novel and semantic
+  SemanticRs<- data.frame()
+  for (sub in 1:13){
+    R<- c()
+    print(sub)
+    filename<-sprintf("semantic_beta_sub%.0f.csv", sub)
+    data<- read.csv(filename, header = FALSE)
+    
+    
+    for (ROI in 2:47){
+      loc<- ROI - 1
+      betas1<- as.numeric(unlist(data[1:5,ROI]))
+      perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Semantic",1:5]))
+      control<- c(1,4,16,64,256)
+      model<-lm(betas1~ control )
+      R[loc]<-as.numeric(unlist(summary(model)$r.square))
+    }
+    
+    
+    R[length(R)+1]<- sub
+    R<-as.vector(R)
+    if (length(SemanticRs)[1]<1){
+      SemanticRs<- R
+    }else{
+      SemanticRs<- rbind(SemanticRs, R)
+    }
+    
+  }
+  SemanticRs<- data.frame(SemanticRs)
+  SemanticRs$Object_Type<- 'Semantic'
+  names(SemanticRs)<- ROIS
+  smeans<-colMeans(SemanticRs[,1:46])
+  barplot(smeans, las = 2, cex.names = .75, main = "Semantic Log Rs", ylab = "R Values", ylim = c(0, .8))
+  
+  
+  
+  
+  NovelRs<- data.frame()
+  for (sub in 1:13){
+    R<- c()
+    print(sub)
+    filename<-sprintf("novel_beta_sub%.0f.csv", sub)
+    data<- read.csv(filename, header = FALSE)
+    
+    
+    for (ROI in 2:47){
+      loc<- ROI - 1
+      betas1<- as.numeric(unlist(data[1:5,ROI]))
+      perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Novel",1:5]))
+      control<- c(1,4,16,64,256)
+      model<-lm(betas1~ control)
+      R[loc]<-as.numeric(unlist(summary(model)$r.square))
+    }
+    
+    
+    R[length(R)+1]<- sub
+    R<-as.vector(R)
+    if (length(NovelRs)[1]<1){
+      NovelRs<- R
+    }else{
+      NovelRs<- rbind(NovelRs, R)
+    }
+    
+  }
+  NovelRs<- data.frame(NovelRs)
+  NovelRs$Object_Type<- 'Novel'
+  names(NovelRs)<- ROIS
+  nmeans<-colMeans(NovelRs[,1:46])
+  barplot(nmeans, las = 2, cex.names = .75, main = "Novel Log Rs", ylab = "R Values", ylim = c(0,.8))
+}
+
+
+CalculatePowerR<- function(){
+  #get linear slope for novel and semantic
+  SemanticRs<- data.frame()
+  for (sub in 1:13){
+    R<- c()
+    print(sub)
+    filename<-sprintf("semantic_beta_sub%.0f.csv", sub)
+    data<- read.csv(filename, header = FALSE)
+    
+    
+    for (ROI in 2:47){
+      loc<- ROI - 1
+      betas1<- as.numeric(unlist(data[1:5,ROI]))+10
+      perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Semantic",1:5]))
+      control<- c(1:5)
+      model<-lm(log(betas1)~ log(control) )
+      R[loc]<-as.numeric(unlist(summary(model)$r.square))
+    }
+    
+    
+    R[length(R)+1]<- sub
+    R<-as.vector(R)
+    if (length(SemanticRs)[1]<1){
+      SemanticRs<- R
+    }else{
+      SemanticRs<- rbind(SemanticRs, R)
+    }
+    
+  }
+  SemanticRs<- data.frame(SemanticRs)
+  SemanticRs$Object_Type<- 'Semantic'
+  names(SemanticRs)<- ROIS
+  smeans<-colMeans(SemanticRs[,1:46])
+  barplot(smeans, las = 2, cex.names = .75, main = "Semantic Power Rs", ylab = "R Values", ylim = c(0, .8))
+  
+  
+  
+  
+  NovelRs<- data.frame()
+  for (sub in 1:13){
+    R<- c()
+    print(sub)
+    filename<-sprintf("novel_beta_sub%.0f.csv", sub)
+    data<- read.csv(filename, header = FALSE)
+    
+    
+    for (ROI in 2:47){
+      loc<- ROI - 1
+      betas1<- as.numeric(unlist(data[1:5,ROI]))+10
+      perf<-as.numeric(unlist(beh[beh$Participant == sub & beh$Object_Type == "Novel",1:5]))
+      control<- c(1:5)
+      model<-lm(log(betas1)~ log(control))
+      R[loc]<-as.numeric(unlist(summary(model)$r.square))
+    }
+    
+    
+    R[length(R)+1]<- sub
+    R<-as.vector(R)
+    if (length(NovelRs)[1]<1){
+      NovelRs<- R
+    }else{
+      NovelRs<- rbind(NovelRs, R)
+    }
+    
+  }
+  NovelRs<- data.frame(NovelRs)
+  NovelRs$Object_Type<- 'Novel'
+  names(NovelRs)<- ROIS
+  nmeans<-colMeans(NovelRs[,1:46])
+  barplot(nmeans, las = 2, cex.names = .75, main = "Novel Power Rs", ylab = "R Values", ylim = c(0,.8))
 }
