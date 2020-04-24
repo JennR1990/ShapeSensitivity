@@ -161,7 +161,7 @@ barplot(nmeans, las = 2, cex.names = .75, main = "Novel Slopes", ylab = "Slopes"
 CalculateR<- function(){
   #get linear slope for novel and semantic
   SemanticRs<- data.frame()
-  for (sub in 1:13){
+  for (sub in 1:12){
     R<- c()
     print(sub)
     filename<-sprintf("semantic_beta_sub%.0f.csv", sub)
@@ -191,7 +191,15 @@ CalculateR<- function(){
   SemanticRs$Object_Type<- 'Semantic'
   names(SemanticRs)<- ROIS
   smeans<-colMeans(SemanticRs[,1:46])
-  barplot(smeans, las = 2, cex.names = .75, main = "Semantic Linear Rs", ylab = "R Values", ylim = c(0, .8))
+  SD<-apply(SemanticRs[1:46],2, sd)
+  ses<- SD/sqrt(12)
+  smeans<- smeans[-9]
+  smeans<- smeans[-31]
+  ses<- ses[-9]
+  ses<- ses[-31]
+  midpoints<-barplot(smeans,space = .5, las = 2, cex.names = .75, main = "Semantic Linear Rs", ylab = "R Values", ylim = c(0, 1), col = 'darkorchid1')
+  arrows(x0 = midpoints, y0=smeans - ses, x1 = midpoints, y1 = smeans + ses, code = 3, angle = 90, length = .03, col = 'darkorchid4')
+  
   
   
   
@@ -227,7 +235,14 @@ CalculateR<- function(){
   NovelRs$Object_Type<- 'Novel'
   names(NovelRs)<- ROIS
   nmeans<-colMeans(NovelRs[,1:46])
-  barplot(nmeans, las = 2, cex.names = .75, main = "Novel Linear Rs", ylab = "R Values", ylim = c(0,.8))
+  SD<-apply(NovelRs[1:46],2, sd)
+  ses<- SD/sqrt(12)
+  nmeans<- nmeans[-9]
+  nmeans<- nmeans[-31]
+  ses<- ses[-9]
+  ses<- ses[-31]
+  midpoints<-barplot(nmeans, space = .5,las = 2, cex.names = .75, main = "Novel Linear Rs", ylab = "R Values", ylim = c(0,1), col ='deepskyblue')
+  arrows(x0 = midpoints, y0=nmeans - ses, x1 = midpoints, y1 = nmeans + ses, code = 3, angle = 90, length = .03, col = 'deepskyblue3')
 }
 
 
