@@ -143,3 +143,7 @@ legend(2,-.5, legend = c("Semantic", "Novel"), col = c('darkorchid1', 'deepskybl
 }
 
 }
+
+
+
+
