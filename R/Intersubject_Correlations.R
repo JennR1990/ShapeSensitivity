@@ -62,7 +62,7 @@ arrows(x0 = midpoints, y0=as.numeric(unlist(Corrs[26,9:12])) - NovelSE[9:12], x1
 dev.off()
 
 
-intercorrs <- read_excel("Data/intersubjectcorrelation_ANOVA.xlsx", 
+intercorrs <- read.table("Data/intersubjectcorrelation_ANOVA.xlsx", 
                               col_types = c("text", "numeric", "text", 
                              "text", "text", "text", "text"))
 
@@ -75,8 +75,7 @@ intercorrs$Part<- as.factor(intercorrs$Part)
 fullmodel <- ezANOVA(data=intercorrs,
                      dv=Correlation,
                      wid=Subject,
-                    between = c(Object, Stream, Hemisphere, Part),
+                    within = c(Object, Stream, Hemisphere, Part),
                      type=3,
                      return_aov=TRUE)
 fullmodel
-return(fullmodel)
