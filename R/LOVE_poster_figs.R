@@ -138,6 +138,7 @@ semanticShapesen_sensitivity<- function (){
 
 
 Locofmaxsensitivity<- function (){
+  library('readxl')
   semantic <- read_excel("Data/semantic_component_elbow_loc_sens.xlsx")
   novels <- read_excel("Data/novel_component_elbow_loc_sens.xlsx")
   vrmax<-semantic$Elbow_Y_loc[semantic$ROI_Location == 'ventral_right' & semantic$Elbox_Y_Sensitivity == max(semantic$Elbox_Y_Sensitivity[semantic$ROI_Location == 'ventral_right'])]
