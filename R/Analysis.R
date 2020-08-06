@@ -12,6 +12,8 @@ fullmodel <- ezANOVA(data=Sens,
                        return_aov=TRUE)
 fullmodel
 
+UpperC<- 
+
 fullmodel <- ezANOVA(data=Comps,
                      dv=Betas,
                      wid=ID,
