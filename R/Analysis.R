@@ -12,17 +12,37 @@ fullmodel <- ezANOVA(data=Sens,
                        return_aov=TRUE)
 fullmodel
 
-UpperC<- 
+aovEffectSize(fullmodel$aov, effectSize = 'pes')
 
-fullmodel <- ezANOVA(data=Comps,
+
+library(MBESS)
+Upper.lim<- c()
+Lower.lim<- c()
+for (i in 1:15){
+Lims <- conf.limits.ncf(F.value = fullmodel$ANOVA[i,4], conf.level = 0.90, df.1 <- 1, df.2 <- 11)
+Lower.lim[i] <- Lims$Lower.Limit/(Lims$Lower.Limit + df.1 + df.2 + 1)
+Upper.lim[i] <- Lims$Upper.Limit/(Lims$Upper.Limit + df.1 + df.2 + 1)
+}
+CIs<-cbind(Upper.lim, Lower.lim)
+
+fullmodel2 <- ezANOVA(data=Comps,
                      dv=Betas,
                      wid=ID,
                      within=.(Component_Value, Pathway, Hemi, Object_Type),
                      type=3,
                      return_aov=TRUE)
-fullmodel
+fullmodel2
+aovEffectSize(fullmodel2$aov, effectSize = 'pes')
 
-
+library(MBESS)
+Upper.lim<- c()
+Lower.lim<- c()
+for (i in 1:15){
+  Lims <- conf.limits.ncf(F.value = fullmodel2$ANOVA[i,4], conf.level = 0.90, df.1 <- 1, df.2 <- 11)
+  Lower.lim[i] <- Lims$Lower.Limit/(Lims$Lower.Limit + df.1 + df.2 + 1)
+  Upper.lim[i] <- Lims$Upper.Limit/(Lims$Upper.Limit + df.1 + df.2 + 1)
+}
+CIs<-cbind(Upper.lim, Lower.lim)
 
 intercorrs <- read.table("Data/intersubjectcorrelation_ANOVA.xlsx", 
                          col_types = c("text", "numeric", "text", 
@@ -42,4 +62,14 @@ fullmodel1 <- ezANOVA(data=intercorrs,
                      return_aov=TRUE)
 fullmodel1
 
+library(MBESS)
+Upper.lim<- c()
+Lower.lim<- c()
+for (i in 1:15){
+  Lims <- conf.limits.ncf(F.value = fullmodel1$ANOVA[i,4], conf.level = 0.90, df.1 <- 1, df.2 <- 11)
+  Lower.lim[i] <- Lims$Lower.Limit/(Lims$Lower.Limit + df.1 + df.2 + 1)
+  Upper.lim[i] <- Lims$Upper.Limit/(Lims$Upper.Limit + df.1 + df.2 + 1)
+}
+CIs<-cbind(Upper.lim, Lower.lim)
 
+aovEffectSize(fullmodel1$aov, effectSize = 'pes')
