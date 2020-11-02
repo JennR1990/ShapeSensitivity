@@ -2,15 +2,31 @@ Sens<- read.csv('Data/Shape sen for each component_ANOVA.csv', header = TRUE)
 Comps<- read.csv('Data/Components_ANOVA_format.csv', header = TRUE)
 Sens$Component_Value<- as.factor(Sens$Component_Value)
 Comps$Component_Value<- as.factor(Comps$Component_Value)
+Sens1<- Sens[Sens$Object_Type == "Novel",]
+Sens2<- Sens[Sens$Object_Type == "Semantic",]
 
   library('ez')
-fullmodel <- ezANOVA(data=Sens,
+fullmodel <- ezANOVA(data=Sens1[Sens1$Pathway == "Ventral",],
                        dv=Betas,
                        wid=ID,
-                       within=.(Component_Value, Pathway, Hemi, Object_Type),
+                       within=.(Component_Value, Hemi),
                        type=3,
                        return_aov=TRUE)
+
+fullmodel <- ezANOVA(data=Sens1[Sens1$Pathway == "Dorsal",],
+                     dv=Betas,
+                     wid=ID,
+                     within=.(Component_Value, Hemi),
+                     type=3,
+                     return_aov=TRUE)
 fullmodel
+
+fullmodel <- ezANOVA(data=Sens1,
+                     dv=Betas,
+                     wid=ID,
+                     within=.(Component_Value, Hemi, Pathway),
+                     type=3,
+                     return_aov=TRUE)
 
 aovEffectSize(fullmodel$aov, effectSize = 'pes')
 

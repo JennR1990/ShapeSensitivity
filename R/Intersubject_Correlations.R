@@ -72,10 +72,11 @@ intercorrs$Object<- as.factor(intercorrs$Object)
 intercorrs$Stream<- as.factor(intercorrs$Stream)
 intercorrs$Hemisphere<- as.factor(intercorrs$Hemisphere)
 intercorrs$Part<- as.factor(intercorrs$Part)
-fullmodel <- ezANOVA(data=intercorrs,
+fullmodel <- ezANOVA(data=intercorrs[intercorrs$Object == "Novel",],
                      dv=Correlation,
                      wid=Subject,
-                    within = c(Object, Stream, Hemisphere, Part),
+                    within = c( Stream, Hemisphere, Part),
                      type=3,
                      return_aov=TRUE)
 fullmodel
+aovEffectSize(fullmodel$aov, effectSize = 'pes')
