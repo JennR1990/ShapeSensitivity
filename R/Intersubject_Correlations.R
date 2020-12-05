@@ -75,7 +75,7 @@ intercorrs$Part<- as.factor(intercorrs$Part)
 fullmodel <- ezANOVA(data=intercorrs[intercorrs$Object == "Novel",],
                      dv=Correlation,
                      wid=Subject,
-                    within = c( Stream, Hemisphere, Part),
+                    within = c( Stream, Part),
                      type=3,
                      return_aov=TRUE)
 fullmodel
