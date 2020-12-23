@@ -9,8 +9,10 @@ Corrs<- read_csv("Data/intersubjectCorrelationTransformed.csv",
                                            VL = col_number(), VLA = col_number(), 
                                             VLP = col_number(), VR = col_number(), 
                                             VRA = col_number(), VRP = col_number()))
-
+Corrs<-intersubjectCorrelationTransformed
 Corrs<- data.frame(Corrs)
+Corrs1<- c()
+Corrs1$V<- c(Corrs$VR[1:12], Corrs$VL[1:12])
 Corrs[25,]<- c(as.numeric(unlist(colMeans(Corrs[Corrs$Object == "Semantic",1:12]))),13,8)
 Corrs[25,13]<- "Average"
 Corrs[25,14]<- "Semantic"
@@ -18,6 +20,7 @@ Corrs[25,14]<- "Semantic"
 Corrs[26,]<- c(as.numeric(unlist(colMeans(Corrs[Corrs$Object == "Novel",1:12]))),13,8)
 Corrs[26,13]<- "Average"
 Corrs[26,14]<- "Novel"
+
 
 SemanticSE<- c()
 NovelSE<- c()
@@ -80,3 +83,51 @@ fullmodel <- ezANOVA(data=intercorrs[intercorrs$Object == "Novel",],
                      return_aov=TRUE)
 fullmodel
 aovEffectSize(fullmodel$aov, effectSize = 'pes')
+
+
+
+
+##load no-hemi file 
+
+semmeans<- colMeans(Corrs[Corrs$Object == "Semantic",1:6], na.rm =TRUE)
+novmeans<- colMeans(Corrs[Corrs$Object == "Novel",1:6], na.rm =TRUE)
+
+SemanticSE<- c()
+NovelSE<- c()
+for (Corr in 1:6){
+  
+  SemanticSE[Corr]<-(sd(Corrs[Corrs$Object == "Semantic",Corr]))/sqrt(24)
+  NovelSE[Corr]<-(sd(Corrs[Corrs$Object == "Novel",Corr]))/sqrt(24)
+  
+}
+
+
+
+svglite(file='figures/Intersubject Correlations_noHemi.svg', width=8, height=8, system_fonts=list(sans = "Arial"))
+layout(matrix(c(1,2,3,4), nrow=2, byrow=TRUE), heights=c(1))   
+#Semantic
+midpoints<-barplot(semmeans[c(1,6,5)],axes = FALSE, space = c(0,.5,.5), width = .5, ylim = c(0,1.5), main = "Familiar Ventral Inter-subject Correlations", density = c(10,10,10),angle = c(45,45,-45,-45), col = 'darkorchid4', xaxt="none")
+axis(1, at=midpoints, labels = c('Ventral', '\n \nVentral \nAnterior', '\n \nVentral \nPosterior'))
+axis(2, at= c(0,.5,1,1.5), las = 1)
+legend(0,1.4, legend = c("Familiar"), fill = c('darkorchid4'),bty = 'n')
+arrows(x0 = midpoints, y0=semmeans[c(1,6,5)] - SemanticSE[c(1,6,5)], x1 = midpoints, y1 = semmeans[c(1,6,5)] + SemanticSE[c(1,6,5)], code = 3, angle = 90, length = .1, col = 'darkorchid4')
+midpoints<-barplot(semmeans[c(2,4,3)],axes = FALSE, space = c(0,.5,.5), width = .5, ylim = c(0,1.5), main = "Familiar Dorsal Inter-subject Correlations",density = c(20,20,10),angle = c(-45,-45,-45,-45), col = 'darkorchid4', xaxt="none")
+axis(1, at=midpoints, labels = c(' Dorsal', ' \n\nDorsal \nAnterior', ' \n\nDorsal \nPosterior'))
+axis(2, at= c(0,.5,1,1.5), las = 1)
+arrows(x0 = midpoints, y0=semmeans[c(2,4,3)] - SemanticSE[c(2,4,3)], x1 = midpoints, y1 = semmeans[c(2,4,3)] + SemanticSE[c(2,4,3)], code = 3, angle = 90, length = .1, col = 'darkorchid4')
+
+
+
+
+#NOVEL
+midpoints<-barplot(novmeans[c(1,6,5)],axes = FALSE, space = c(0,.5,.5), width = .5, ylim = c(0,1.5), main = "Unfamiliar Ventral Inter-subject Correlations", density = c(10,10,10),angle = c(45,45,-45,-45), col = 'deepskyblue3', xaxt="none")
+axis(1, at=midpoints, labels = c('Ventral', '\n\nVentral \nAnterior', '\n\nVentral \nPosterior'))
+axis(2, at= c(0,.5,1,1.5), las = 1)
+legend(0,1.4, legend = c("Unfamiliar"), fill = c('deepskyblue3'),bty = 'n')
+arrows(x0 = midpoints, y0=novmeans[c(1,6,5)] - NovelSE[c(1,6,5)], x1 = midpoints, y1 = novmeans[c(1,6,5)] + NovelSE[c(1,6,5)], code = 3, angle = 90, length = .1, col = 'deepskyblue3')
+midpoints<-barplot(novmeans[c(2,4,3)],axes = FALSE, space = c(0,.5,.5), width = .5, ylim = c(0,1.5), main = "Unfamiliar Dorsal Inter-subject Correlations",density = c(20,20,10),angle = c(-45,-45,-45,-45), col = 'deepskyblue3', xaxt="none")
+axis(1, at=midpoints, labels = c(' Dorsal', ' \n\nDorsal \nAnterior', ' \n\nDorsal \nPosterior'))
+axis(2, at= c(0,.5,1,1.5), las = 1)
+arrows(x0 = midpoints, y0=novmeans[c(2,4,3)] - NovelSE[c(2,4,3)], x1 = midpoints, y1 = novmeans[c(2,4,3)] + NovelSE[c(2,4,3)], code = 3, angle = 90, length = .1, col = 'deepskyblue3')
+
+dev.off()
