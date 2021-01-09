@@ -68,7 +68,7 @@ Upper.lim[i] <- Lims$Upper.Limit/(Lims$Upper.Limit + df.1 + df.2 + 1)
 }
 CIs<-cbind(Upper.lim, Lower.lim)
 
-fullmodel2 <- ezANOVA(data=Sens,
+fullmodel2 <- ezANOVA(data=Comps,
                      dv=Betas,
                      wid=ID,
                      within =.(Component_Value, Pathway, Object_Type),
@@ -87,9 +87,7 @@ for (i in 1:15){
 }
 CIs<-cbind(Upper.lim, Lower.lim)
 
-intercorrs <- read.table("Data/intersubjectcorrelation_ANOVA.xlsx", 
-                         col_types = c("text", "numeric", "text", 
-                                       "text", "text", "text", "text"))
+intercorrs <- read.table("Data/intersubjectcorrelation_ANOVA.xlsx")
 
 
 intercorrs$Subject<- as.factor(intercorrs$Subject)
@@ -192,3 +190,199 @@ c1<-rep(c(1, -1), each = 24)
 mydata$c2<- c2
 mydata$c1<- c1
 anova(lm(Betas ~ c1 + c2, mydata))
+
+
+
+
+##I want to do planned comparisons for the bigger comparison between novel and semantic
+
+#pull out only dorsal pathway  
+
+
+mydata<-Sens[Sens$Pathway == "Dorsal",]
+c2<-rep(rep(c(-1, 1), each = 48), times = 1)
+c1<-rep(rep(c(1, -1), each = 48), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+
+
+mydata<-Sens[Sens$Pathway == "Ventral",]
+c2<-rep(rep(c(-1, 1), each = 48), times = 1)
+c1<-rep(rep(c(1, -1), each = 48), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+
+mydata<-Sens[Sens$Pathway == "Dorsal" & Sens$Component_Value == "1",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+mydata<-Sens[Sens$Pathway == "Dorsal" & Sens$Component_Value == "2",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+mydata<-Sens[Sens$Pathway == "Ventral" & Sens$Component_Value == "1",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+mydata<-Sens[Sens$Pathway == "Ventral" & Sens$Component_Value == "2",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+
+
+
+##now look at the component correlation values. 
+
+mydata<-Comps[Comps$Pathway == "Dorsal",]
+c2<-rep(rep(c(-1, 1), each = 48), times = 1)
+c1<-rep(rep(c(1, -1), each = 48), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+
+
+mydata<-Comps[Comps$Pathway == "Ventral",]
+c2<-rep(rep(c(-1, 1), each = 48), times = 1)
+c1<-rep(rep(c(1, -1), each = 48), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+
+mydata<-Comps[Comps$Pathway == "Dorsal" & Comps$Component_Value == "1",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+mydata<-Comps[Comps$Pathway == "Dorsal" & Comps$Component_Value == "2",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+mydata<-Comps[Comps$Pathway == "Ventral" & Comps$Component_Value == "1",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+mydata<-Comps[Comps$Pathway == "Ventral" & Comps$Component_Value == "2",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Betas ~ c1 + c2, mydata))
+
+
+
+##Now i want to look at the differences in correlations.
+
+
+mydata<-intercorrs[intercorrs$Object == "Semantic" & intercorrs$Stream == "Dorsal",]
+c2<-rep(rep(c(-1, 1), each = 12), times = 2)
+c1<-rep(rep(c(1, -1), each = 12), times = 2)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+mydata<-intercorrs[intercorrs$Object == "Semantic" & intercorrs$Stream == "Ventral",]
+c2<-rep(rep(c(-1, 1), each = 12), times = 2)
+c1<-rep(rep(c(1, -1), each = 12), times = 2)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+mydata<-intercorrs[intercorrs$Object == "Semantic" & intercorrs$Part == "Anterior",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+mydata<-intercorrs[intercorrs$Object == "Semantic" & intercorrs$Part == "Posterior",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+
+mydata<-intercorrs[intercorrs$Object == "Novel" & intercorrs$Stream == "Dorsal",]
+c2<-rep(rep(c(-1, 1), each = 12), times = 2)
+c1<-rep(rep(c(1, -1), each = 12), times = 2)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+
+mydata<-intercorrs[intercorrs$Object == "Novel" & intercorrs$Stream == "Ventral",]
+c2<-rep(rep(c(-1, 1), each = 12), times = 2)
+c1<-rep(rep(c(1, -1), each = 12), times = 2)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+
+mydata<-intercorrs[intercorrs$Object == "Novel" & intercorrs$Part == "Anterior",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+mydata<-intercorrs[intercorrs$Object == "Novel" & intercorrs$Part == "Posterior",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+
+mydata<-intercorrs[intercorrs$Part == "Anterior" & intercorrs$Stream == "Dorsal",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+mydata<-intercorrs[intercorrs$Part == "Anterior" & intercorrs$Stream == "Ventral",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+mydata<-intercorrs[intercorrs$Part == "Posterior" & intercorrs$Stream == "Dorsal",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
+
+mydata<-intercorrs[intercorrs$Part == "Posterior" & intercorrs$Stream == "Ventral",]
+c2<-rep(rep(c(-1, 1), each = 24), times = 1)
+c1<-rep(rep(c(1, -1), each = 24), times = 1)
+mydata$c2<- c2
+mydata$c1<- c1
+anova(lm(Correlation ~ c1 + c2, mydata))
