@@ -386,3 +386,34 @@ c1<-rep(rep(c(1, -1), each = 24), times = 1)
 mydata$c2<- c2
 mydata$c1<- c1
 anova(lm(Correlation ~ c1 + c2, mydata))
+
+
+
+## t-tests on regression data. (i took the correlation values for each participant and will compare them to zero)
+
+mean(Comps1$Betas[Comps1$Pathway == "Dorsal" & Comps1$Component_Value == 1])
+t.test(Comps1$Betas[Comps1$Pathway == "Dorsal" & Comps1$Component_Value == 1])
+mean(Comps1$Betas[Comps1$Pathway == "Dorsal" & Comps1$Component_Value == 2])
+t.test(Comps1$Betas[Comps1$Pathway == "Dorsal" & Comps1$Component_Value == 2])
+
+mean(Comps1$Betas[Comps1$Pathway == "Ventral" & Comps1$Component_Value == 1])
+t.test(Comps1$Betas[Comps1$Pathway == "Ventral" & Comps1$Component_Value == 1])
+mean(Comps1$Betas[Comps1$Pathway == "Ventral" & Comps1$Component_Value == 2])
+t.test(Comps1$Betas[Comps1$Pathway == "Ventral" & Comps1$Component_Value == 2])
+
+
+
+
+mean(Comps2$Betas[Comps2$Pathway == "Dorsal" & Comps2$Component_Value == 1])
+t.test(Comps2$Betas[Comps2$Pathway == "Dorsal" & Comps2$Component_Value == 1])
+mean(Comps2$Betas[Comps2$Pathway == "Dorsal" & Comps2$Component_Value == 2])
+t.test(Comps2$Betas[Comps2$Pathway == "Dorsal" & Comps2$Component_Value == 2])
+
+mean(Comps2$Betas[Comps2$Pathway == "Ventral" & Comps2$Component_Value == 1])
+t.test(Comps2$Betas[Comps2$Pathway == "Ventral" & Comps2$Component_Value == 1])
+mean(Comps2$Betas[Comps2$Pathway == "Ventral" & Comps2$Component_Value == 2])
+t.test(Comps2$Betas[Comps2$Pathway == "Ventral" & Comps2$Component_Value == 2])
+  
+
+
+
